@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoKana サンプル</title>
+    <script src="../src/vanilla_autokana.js" defer></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        form {
+            max-width: 500px;
+            margin: auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>AutoKana サンプル</h1>
+    <p>以下のフォームで「姓」と「名」を入力すると、それぞれのカナが自動的に変換されます。</p>
+    <form>
+        <label for="shipping_address_family_name">姓</label>
+        <input type="text" id="shipping_address_family_name" placeholder="例: 山田">
+
+        <label for="shipping_address_family_name_kana">姓 (カナ)</label>
+        <input type="text" id="shipping_address_family_name_kana" placeholder="例: ヤマダ" readonly>
+
+        <label for="shipping_address_first_name">名</label>
+        <input type="text" id="shipping_address_first_name" placeholder="例: 太郎">
+
+        <label for="shipping_address_first_name_kana">名 (カナ)</label>
+        <input type="text" id="shipping_address_first_name_kana" placeholder="例: タロウ" readonly>
+    </form>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            try {
+                // 姓の自動カナ変換
+                autoKana(
+                    "#shipping_address_family_name",
+                    "#shipping_address_family_name_kana",
+                    { katakana: true }
+                );
+
+                // 名の自動カナ変換
+                autoKana(
+                    "#shipping_address_first_name",
+                    "#shipping_address_first_name_kana",
+                    { katakana: true }
+                );
+            } catch (e) {
+                console.error("autoKanaの初期化に失敗しました:", e);
+            }
+        });
+    </script>
+</body>
+</html>
